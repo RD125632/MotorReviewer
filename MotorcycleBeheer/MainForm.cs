@@ -39,13 +39,13 @@ namespace MotorcycleBeheer
 
             // Setup navigation buttons
             brandsMenuButton.Click += (s, e) => ShowPage(new BrandListPage(_brandService));
-            motorcyclesMenuButton.Click += (s, e) => ShowPage(new MotorcycleListPage(_motorcycleService));
+            motorcyclesMenuButton.Click += (s, e) => ShowPage(new MotorcycleListPage(_motorcycleService, _brandService, _categoryService));
             reviewsMenuButton.Click += (s, e) => ShowPage(new ReviewListPage(_reviewService, _motorcycleService, _userService));
             userMenuButton.Click += (s, e) => ShowPage(new UserListPage(_userService));
             categoryMenuButton.Click += (s, e) => ShowPage(new CategoryListPage(_categoryService));
 
             // Show default page
-            ShowPage(new MotorcycleListPage(_motorcycleService));
+            ShowPage(new MotorcycleListPage(_motorcycleService, _brandService, _categoryService));
         }
 
         private void ShowPage(UserControl page)
