@@ -32,9 +32,9 @@ namespace MRL.Desktop.Services
         }
 
         // PUT: api/Motorcycle/5
-        public async Task<MotorcycleDTO?> UpdateMotorcycleAsync(int id, MotorcycleDTO motorcycle)
+        public async Task<MotorcycleDTO?> UpdateMotorcycleAsync(MotorcycleDTO motorcycle)
         {
-            var response = await _http.PutAsJsonAsync("api/motorcycle/" + id, motorcycle);
+            var response = await _http.PutAsJsonAsync("api/motorcycle/" + motorcycle.Id, motorcycle);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<MotorcycleDTO>();
         }
