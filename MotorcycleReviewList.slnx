@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MotorcycleBeheer/MRL.Desktop.csproj" />
+  <Project Path="MRL.Shared/MRL.Shared.csproj" Id="3dbf795d-f757-4c0a-9fdb-5423d3d42431" />
+  <Project Path="MRL.WebAPI/MRL.WebAPI.csproj" Id="659a1936-a6d5-4ced-8922-283603d77ad7" />
+</Solution>

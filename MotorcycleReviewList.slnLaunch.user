@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Desktop",
+    "Projects": [
+      {
+        "Path": "MotorcycleBeheer\\MRL.Desktop.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "MRL.WebAPI\\MRL.WebAPI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
