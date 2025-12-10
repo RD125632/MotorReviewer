@@ -38,7 +38,7 @@
             userComboBox = new ComboBox();
             dateTimePicker = new DateTimePicker();
             handlingTextBox = new TextBox();
-            speedTextBox = new TextBox();
+            EngineTextBox = new TextBox();
             brakesTextBox = new TextBox();
             comfortTextBox = new TextBox();
             valueTextBox = new TextBox();
@@ -46,7 +46,7 @@
             commentRich = new RichTextBox();
             reviewDateLabel = new Label();
             handlingLabel = new Label();
-            speedLabel = new Label();
+            EngineLabel = new Label();
             brakesLabel = new Label();
             valueLabel = new Label();
             comfortLabel = new Label();
@@ -72,6 +72,7 @@
             saveButton.TabIndex = 10;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
             // 
             // idValueLabel
             // 
@@ -139,12 +140,12 @@
             handlingTextBox.Size = new Size(47, 23);
             handlingTextBox.TabIndex = 17;
             // 
-            // speedTextBox
+            // EngineTextBox
             // 
-            speedTextBox.Location = new Point(88, 161);
-            speedTextBox.Name = "speedTextBox";
-            speedTextBox.Size = new Size(47, 23);
-            speedTextBox.TabIndex = 18;
+            EngineTextBox.Location = new Point(88, 161);
+            EngineTextBox.Name = "EngineTextBox";
+            EngineTextBox.Size = new Size(47, 23);
+            EngineTextBox.TabIndex = 18;
             // 
             // brakesTextBox
             // 
@@ -200,14 +201,14 @@
             handlingLabel.TabIndex = 25;
             handlingLabel.Text = "Handling:";
             // 
-            // speedLabel
+            // EngineLabel
             // 
-            speedLabel.AutoSize = true;
-            speedLabel.Location = new Point(9, 164);
-            speedLabel.Name = "speedLabel";
-            speedLabel.Size = new Size(42, 15);
-            speedLabel.TabIndex = 26;
-            speedLabel.Text = "Speed:";
+            EngineLabel.AutoSize = true;
+            EngineLabel.Location = new Point(9, 164);
+            EngineLabel.Name = "EngineLabel";
+            EngineLabel.Size = new Size(46, 15);
+            EngineLabel.TabIndex = 26;
+            EngineLabel.Text = "Engine:";
             // 
             // brakesLabel
             // 
@@ -274,7 +275,7 @@
             Controls.Add(comfortLabel);
             Controls.Add(stabilityLabel);
             Controls.Add(brakesLabel);
-            Controls.Add(speedLabel);
+            Controls.Add(EngineLabel);
             Controls.Add(handlingLabel);
             Controls.Add(reviewDateLabel);
             Controls.Add(commentRich);
@@ -282,7 +283,7 @@
             Controls.Add(stabilityTextBox);
             Controls.Add(brakesTextBox);
             Controls.Add(comfortTextBox);
-            Controls.Add(speedTextBox);
+            Controls.Add(EngineTextBox);
             Controls.Add(handlingTextBox);
             Controls.Add(dateTimePicker);
             Controls.Add(userIdLabel);
@@ -311,7 +312,7 @@
         private ComboBox userComboBox;
         private DateTimePicker dateTimePicker;
         private TextBox handlingTextBox;
-        private TextBox speedTextBox;
+        private TextBox EngineTextBox;
         private TextBox brakesTextBox;
         private TextBox comfortTextBox;
         private TextBox valueTextBox;
@@ -319,7 +320,7 @@
         private RichTextBox commentRich;
         private Label reviewDateLabel;
         private Label handlingLabel;
-        private Label speedLabel;
+        private Label EngineLabel;
         private Label brakesLabel;
         private Label valueLabel;
         private Label comfortLabel;

@@ -21,7 +21,7 @@ namespace MRL.WebAPI.Controllers
             UserId = Review.UserId,
             ReviewDate = Review.ReviewDate,
             HandlingScore = Review.HandlingScore,
-            SpeedScore = Review.SpeedScore,
+            EngineScore = Review.EngineScore,
             ComfortScore = Review.ComfortScore,
             BrakesScore = Review.BrakesScore,
             StabilityScore = Review.StabilityScore,
@@ -37,7 +37,7 @@ namespace MRL.WebAPI.Controllers
             entity.UserId = dto.UserId;
             entity.ReviewDate = dto.ReviewDate;
             entity.HandlingScore = dto.HandlingScore;
-            entity.SpeedScore = dto.SpeedScore;
+            entity.EngineScore = dto.EngineScore;
             entity.ComfortScore = dto.ComfortScore;
             entity.BrakesScore = dto.BrakesScore;
             entity.StabilityScore = dto.StabilityScore;
@@ -48,15 +48,43 @@ namespace MRL.WebAPI.Controllers
 
         #region HTTP Calls
 
-        // GET: api/Reviews
+        // GET: api/Review?....
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviews(
+            [FromQuery] int? motorcycleId,
+            [FromQuery] DateTime? from,
+            [FromQuery] DateTime? to)
         {
-            var result = await _context.Reviews.Select(b => ToDto(b)).ToListAsync();
-            return Ok(result);
+            // Start with all reviews
+            IQueryable<Review> query = _context.Reviews;
+
+            if (motorcycleId.HasValue) query = query.Where(r => r.MotorcycleId == motorcycleId.Value);
+            if (from.HasValue) query = query.Where(r => r.ReviewDate >= from.Value);
+            if (to.HasValue) query = query.Where(r => r.ReviewDate <= to.Value);
+
+            var reviews = await query
+                .OrderBy(r => r.ReviewDate)
+                .Select(r => new ReviewDTO
+                {
+                    Id = r.Id,
+                    MotorcycleId = r.MotorcycleId,
+                    UserId = r.UserId,
+                    ReviewDate = r.ReviewDate,
+                    HandlingScore = r.HandlingScore,
+                    EngineScore = r.EngineScore,
+                    ComfortScore = r.ComfortScore,
+                    BrakesScore = r.BrakesScore,
+                    StabilityScore = r.StabilityScore,
+                    ValueScore = r.ValueScore,
+                    Comment = r.Comment
+                })
+                .ToListAsync();
+
+            return Ok(reviews);
         }
 
-        // GET api/Reviews/5
+
+        // GET api/Review/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ReviewDTO>> GetById(int id)
         {
@@ -68,7 +96,7 @@ namespace MRL.WebAPI.Controllers
             return Ok(ToDto(Review));
         }
 
-        // POST api/Reviews
+        // POST api/Review
         [HttpPost]
         public async Task<ActionResult<ReviewDTO>> Create(ReviewDTO dto)
         {
@@ -84,7 +112,7 @@ namespace MRL.WebAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = Review.Id }, resultDto);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Review/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, ReviewDTO dto)
         {
@@ -112,7 +140,7 @@ namespace MRL.WebAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Review/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

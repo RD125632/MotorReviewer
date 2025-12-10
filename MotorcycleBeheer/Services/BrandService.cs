@@ -32,19 +32,17 @@ namespace MRL.Desktop.Services
         }
 
         // PUT: api/Brand/5
-        public async Task<bool> UpdateBrandAsync(BrandDTO Brand)
+        public async Task UpdateBrandAsync(BrandDTO Brand)
         {
             var response = await _http.PutAsJsonAsync("api/Brand/" + Brand.Id, Brand);
             response.EnsureSuccessStatusCode();
-            return true;
         }
 
         // DELETE: api/Brand/5
-        public async Task<bool> DeleteBrandAsync(int id)
+        public async Task DeleteBrandAsync(int id)
         {
             var response = await _http.DeleteAsync("api/Brand/" + id);
             response.EnsureSuccessStatusCode();
-            return true;
         }
 
     }

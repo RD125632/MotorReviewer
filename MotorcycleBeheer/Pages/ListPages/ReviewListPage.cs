@@ -80,8 +80,8 @@ namespace MRL.Desktop.Pages
             });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "SpeedScore",
-                HeaderText = "Speed",
+                DataPropertyName = "EngineScore",
+                HeaderText = "Engine",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 ReadOnly = true
             });
@@ -172,7 +172,7 @@ namespace MRL.Desktop.Pages
 
             motorcycleColumn.DataSource = motorcycleDTOs;
             motorcycleColumn.ValueMember = "Id";
-            motorcycleColumn.DisplayMember = "Name";
+            motorcycleColumn.DisplayMember = "Model";
 
             // User column
             if (dataGridView.Columns["UserColumn"] is not DataGridViewComboBoxColumn userColumn)

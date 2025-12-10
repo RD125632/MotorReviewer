@@ -13,7 +13,7 @@ namespace MotorcycleBeheer
         private readonly UserService _userService;
         private readonly CategoryService _categoryService;
 
-        private const string BaseURL = "https://localhost:44324/";
+        private const string BaseURL = "https://localhost:7224/";
 
         public MainForm()
         {

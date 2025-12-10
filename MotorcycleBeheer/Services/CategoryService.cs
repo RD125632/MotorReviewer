@@ -32,19 +32,17 @@ namespace MRL.Desktop.Services
         }
 
         // PUT: api/Category/5
-        public async Task<CategoryDTO?> UpdateCategoryAsync(CategoryDTO Category)
+        public async Task UpdateCategoryAsync(CategoryDTO Category)
         {
             var response = await _http.PutAsJsonAsync("api/Category/" + Category.Id, Category);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<CategoryDTO>();
         }
 
         // DELETE: api/Category/5
-        public async Task<bool> DeleteCategoryAsync(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
             var response = await _http.DeleteAsync("api/Category/" + id);
             response.EnsureSuccessStatusCode();
-            return true;
         }
 
     }

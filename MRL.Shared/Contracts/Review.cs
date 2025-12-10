@@ -7,7 +7,7 @@ public class ReviewDTO
     public int UserId { get; set; }
     public DateTime ReviewDate { get; set; }
     public decimal HandlingScore { get; set; }
-    public decimal SpeedScore { get; set; }
+    public decimal EngineScore { get; set; }
     public decimal ComfortScore { get; set; }
     public decimal BrakesScore { get; set; }
     public decimal StabilityScore { get; set; }
@@ -24,7 +24,7 @@ public class ReviewDTO
             UserId = this.UserId,
             ReviewDate = this.ReviewDate,
             HandlingScore = this.HandlingScore,
-            SpeedScore = this.SpeedScore,
+            EngineScore = this.EngineScore,
             ComfortScore = this.ComfortScore,
             BrakesScore = this.BrakesScore,
             StabilityScore = this.StabilityScore,
@@ -42,7 +42,7 @@ public class ReviewDTO
             UserId == other.UserId &&
             ReviewDate == other.ReviewDate &&
             HandlingScore == other.HandlingScore &&
-            SpeedScore == other.SpeedScore &&
+            EngineScore == other.EngineScore &&
             ComfortScore == other.ComfortScore &&
             BrakesScore == other.BrakesScore &&
             StabilityScore == other.StabilityScore &&

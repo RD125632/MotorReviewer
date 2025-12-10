@@ -13,5 +13,5 @@ public partial class Brand
     public string Name { get; set; } = null!;
 
     [InverseProperty("Brand")]
-    public virtual ICollection<Motorcycle> Motorcycles { get; set; } = new List<Motorcycle>();
+    public virtual ICollection<Motorcycle> Motorcycles { get; set; } = [];
 }

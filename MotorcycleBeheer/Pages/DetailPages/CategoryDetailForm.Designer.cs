@@ -53,6 +53,7 @@
             saveButton.TabIndex = 10;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
             // 
             // idValueLabel
             // 

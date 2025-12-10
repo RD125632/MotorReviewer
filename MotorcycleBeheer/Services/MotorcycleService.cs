@@ -32,19 +32,17 @@ namespace MRL.Desktop.Services
         }
 
         // PUT: api/Motorcycle/5
-        public async Task<MotorcycleDTO?> UpdateMotorcycleAsync(MotorcycleDTO motorcycle)
+        public async Task UpdateMotorcycleAsync(MotorcycleDTO motorcycle)
         {
             var response = await _http.PutAsJsonAsync("api/motorcycle/" + motorcycle.Id, motorcycle);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<MotorcycleDTO>();
         }
 
         // DELETE: api/Motorcycle/5
-        public async Task<bool> DeleteMotorcycleAsync(int id)
+        public async Task DeleteMotorcycleAsync(int id)
         {
             var response = await _http.DeleteAsync("api/motorcycle/" + id);
             response.EnsureSuccessStatusCode();
-            return true;
         }
 
     }

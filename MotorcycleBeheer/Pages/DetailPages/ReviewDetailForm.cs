@@ -38,29 +38,41 @@ namespace MRL.Desktop.Pages.DetailPages
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            motorcycleComboBox.DataSource = _motorcycleService.GetMotorcyclesAsync();
-            motorcycleComboBox.DisplayMember = "Name";
-            motorcycleComboBox.ValueMember = "Id";
-            motorcycleComboBox.SelectedValue = CurrentItem.MotorcycleId;
-
-            userComboBox.DataSource = _userService.GetUsersAsync();
-            userComboBox.DisplayMember = "Name";
-            userComboBox.ValueMember = "Id";
-            userComboBox.SelectedValue = CurrentItem.UserId;
+            _ = LoadMotorcycles();
+            _ = LoadUsers();
 
             // Load DTO into controls
             idValueLabel.Text = CurrentItem.Id.ToString();
-            dateTimePicker.Value = CurrentItem.ReviewDate;
+            dateTimePicker.Value = DateTime.Now;
 
             handlingTextBox.Text = CurrentItem.HandlingScore.ToString();
-            speedTextBox.Text = CurrentItem.SpeedScore.ToString();
+            EngineTextBox.Text = CurrentItem.EngineScore.ToString();
             comfortTextBox.Text = CurrentItem.ComfortScore.ToString();
             brakesTextBox.Text = CurrentItem.BrakesScore.ToString();
             stabilityTextBox.Text = CurrentItem.StabilityScore.ToString();
             valueTextBox.Text = CurrentItem.ValueScore.ToString();
             overallLabel.Text = "Overall: " + CurrentItem.OverallScore;
             commentRich.Text = CurrentItem.Comment;
+        }
+
+        private async Task LoadMotorcycles()
+        {
+            motorcycleComboBox.DisplayMember = "Model";
+            motorcycleComboBox.ValueMember = "Id";
+            motorcycleComboBox.DataSource = await _motorcycleService.GetMotorcyclesAsync();
+
+            if (CurrentItem != null)
+                motorcycleComboBox.SelectedValue = CurrentItem.MotorcycleId;
+        }
+
+        private async Task LoadUsers()
+        {
+            userComboBox.DisplayMember = "Name";
+            userComboBox.ValueMember = "Id";
+            userComboBox.DataSource = await _userService.GetUsersAsync();
+
+            if (CurrentItem != null)
+                userComboBox.SelectedValue = CurrentItem.UserId;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -72,7 +84,7 @@ namespace MRL.Desktop.Pages.DetailPages
 
             // Parse all scores once
             var handling = ParseScore(handlingTextBox);
-            var speed = ParseScore(speedTextBox);
+            var Engine = ParseScore(EngineTextBox);
             var comfort = ParseScore(comfortTextBox);
             var brakes = ParseScore(brakesTextBox);
             var stability = ParseScore(stabilityTextBox);
@@ -80,14 +92,14 @@ namespace MRL.Desktop.Pages.DetailPages
 
             // Store individual scores
             CurrentItem.HandlingScore = handling;
-            CurrentItem.SpeedScore = speed;
+            CurrentItem.EngineScore = Engine;
             CurrentItem.ComfortScore = comfort;
             CurrentItem.BrakesScore = brakes;
             CurrentItem.StabilityScore = stability;
             CurrentItem.ValueScore = value;
 
             // Calculate average based on other scores
-            var allScores = new[] { handling, speed, comfort, brakes, stability, value };
+            var allScores = new[] { handling, Engine, comfort, brakes, stability, value };
             CurrentItem.OverallScore = allScores.Average();
 
             CurrentItem.Comment = commentRich.Text;

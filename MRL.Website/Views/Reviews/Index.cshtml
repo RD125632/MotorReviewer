@@ -1,0 +1,121 @@
+﻿@using MRL.Website.ViewModel
+@model ReviewsIndexViewModel
+
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Motorcycle Review Scores";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <label for="motorcycleSelect" class="form-label">Motorcycle</label>
+        <select id="motorcycleSelect" class="form-select">
+            <option value="">All motorcycles</option>
+            @foreach (var m in Model.Motorcycles)
+            {
+                <option value="@m.Id">@m.Model</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label for="metricSelect" class="form-label">Score type</label>
+        <select id="metricSelect" class="form-select">
+            <option value="Overall">Overall</option>
+            <option value="Handling">Handling</option>
+            <option value="Engine">Engine</option>
+            <option value="Comfort">Comfort</option>
+            <option value="Brakes">Brakes</option>
+            <option value="Stability">Stability</option>
+            <option value="Value">Value</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label for="fromDate" class="form-label">From</label>
+        <input id="fromDate" type="date" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label for="toDate" class="form-label">To</label>
+        <input id="toDate" type="date" class="form-control" />
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+        <button id="applyFiltersBtn" class="btn btn-primary w-100">
+            Apply
+        </button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body" style="height: 665px;">
+        <canvas id="reviewsChart"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+            let reviewsChart;
+
+        async function loadChart() {
+            const motorcycleId = document.getElementById('motorcycleSelect').value;
+            const metric = document.getElementById('metricSelect').value;
+            const from = document.getElementById('fromDate').value;
+            const to = document.getElementById('toDate').value;
+
+            const params = new URLSearchParams();
+
+            if (motorcycleId) params.append('motorcycleId', motorcycleId);
+            if (metric) params.append('metric', metric);
+            if (from) params.append('from', from);
+            if (to) params.append('to', to);
+
+            const response = await fetch(`@Url.Action("ChartData", "Reviews")?${params.toString()}`);
+            const data = await response.json();
+
+            const ctx = document.getElementById('reviewsChart').getContext('2d');
+
+            if (reviewsChart) {
+                reviewsChart.destroy();
+            }
+
+            reviewsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: data.datasets.map(ds => ({
+                        label: ds.label,
+                        data: ds.data,
+                        pointRadius: 4,
+                        tension: 0.2,
+                        borderWidth: 2
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('applyFiltersBtn')
+            .addEventListener('click', function () {
+                loadChart();
+            });
+
+        // initial load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadChart();
+        });
+    </script>
+}

@@ -1,7 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddHttpClient("MotorcycleReviewsApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7224");
+});
 
 var app = builder.Build();
 
@@ -22,5 +27,10 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Reviews}/{action=Index}/{id?}");
+
 
 app.Run();

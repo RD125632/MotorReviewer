@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             comfortLabel = new Label();
-            speedLabel = new Label();
+            EngineLabel = new Label();
             handlingLabel = new Label();
             reviewDateLabel = new Label();
             powerTextBox = new TextBox();
@@ -55,14 +55,14 @@
             comfortLabel.TabIndex = 54;
             comfortLabel.Text = "Power:";
             // 
-            // speedLabel
+            // EngineLabel
             // 
-            speedLabel.AutoSize = true;
-            speedLabel.Location = new Point(12, 167);
-            speedLabel.Name = "speedLabel";
-            speedLabel.Size = new Size(26, 15);
-            speedLabel.TabIndex = 51;
-            speedLabel.Text = "CC:";
+            EngineLabel.AutoSize = true;
+            EngineLabel.Location = new Point(12, 167);
+            EngineLabel.Name = "EngineLabel";
+            EngineLabel.Size = new Size(26, 15);
+            EngineLabel.TabIndex = 51;
+            EngineLabel.Text = "CC:";
             // 
             // handlingLabel
             // 
@@ -154,6 +154,7 @@
             saveButton.TabIndex = 35;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
             // 
             // idValueLabel
             // 
@@ -187,7 +188,7 @@
             ClientSize = new Size(355, 282);
             Controls.Add(modelTextBox);
             Controls.Add(comfortLabel);
-            Controls.Add(speedLabel);
+            Controls.Add(EngineLabel);
             Controls.Add(handlingLabel);
             Controls.Add(reviewDateLabel);
             Controls.Add(powerTextBox);
@@ -209,7 +210,7 @@
 
         #endregion
         private Label comfortLabel;
-        private Label speedLabel;
+        private Label EngineLabel;
         private Label handlingLabel;
         private Label reviewDateLabel;
         private TextBox powerTextBox;

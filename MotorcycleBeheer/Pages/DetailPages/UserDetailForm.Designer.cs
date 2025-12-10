@@ -34,7 +34,7 @@
             idLabel = new Label();
             nameLabel = new Label();
             nameTextBox = new TextBox();
-            this.experienceLevelLabel = new Label();
+            experienceLevelLabel = new Label();
             experienceLevelTextBox = new TextBox();
             SuspendLayout();
             // 
@@ -43,7 +43,7 @@
             cancelButton.Location = new Point(172, 97);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
-            cancelButton.TabIndex = 11;
+            cancelButton.TabIndex = 4;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
             // 
@@ -52,9 +52,10 @@
             saveButton.Location = new Point(91, 97);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(75, 23);
-            saveButton.TabIndex = 10;
+            saveButton.TabIndex = 3;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
             // 
             // idValueLabel
             // 
@@ -88,30 +89,30 @@
             nameTextBox.Location = new Point(76, 38);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.Size = new Size(171, 23);
-            nameTextBox.TabIndex = 6;
+            nameTextBox.TabIndex = 1;
             // 
             // experienceLevelLabel
             // 
-            this.experienceLevelLabel.AutoSize = true;
-            this.experienceLevelLabel.Location = new Point(12, 70);
-            this.experienceLevelLabel.Name = "experienceLevelLabel";
-            this.experienceLevelLabel.Size = new Size(66, 15);
-            this.experienceLevelLabel.TabIndex = 13;
-            this.experienceLevelLabel.Text = "Experience:";
+            experienceLevelLabel.AutoSize = true;
+            experienceLevelLabel.Location = new Point(12, 70);
+            experienceLevelLabel.Name = "experienceLevelLabel";
+            experienceLevelLabel.Size = new Size(66, 15);
+            experienceLevelLabel.TabIndex = 13;
+            experienceLevelLabel.Text = "Experience:";
             // 
             // experienceLevelTextBox
             // 
             experienceLevelTextBox.Location = new Point(76, 67);
             experienceLevelTextBox.Name = "experienceLevelTextBox";
             experienceLevelTextBox.Size = new Size(171, 23);
-            experienceLevelTextBox.TabIndex = 12;
+            experienceLevelTextBox.TabIndex = 2;
             // 
             // UserDetailForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(292, 149);
-            Controls.Add(this.experienceLevelLabel);
+            Controls.Add(experienceLevelLabel);
             Controls.Add(experienceLevelTextBox);
             Controls.Add(cancelButton);
             Controls.Add(saveButton);

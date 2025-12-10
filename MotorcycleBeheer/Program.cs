@@ -1,4 +1,6 @@
-namespace MotorcycleBeheer
+using MotorcycleBeheer;
+
+namespace MRL.Desktop
 {
     internal static class Program
     {

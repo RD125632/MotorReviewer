@@ -46,6 +46,7 @@
             addButton.Size = new Size(32, 32);
             addButton.TabIndex = 1;
             addButton.UseVisualStyleBackColor = false;
+            addButton.Click += AddButton_Click;
             // 
             // contentTableLayoutHeader
             // 

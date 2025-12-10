@@ -38,24 +38,37 @@ namespace MRL.Desktop.Pages.DetailPages
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            brandComboBox.DataSource = _brandService.GetBrandsAsync();
-            brandComboBox.DisplayMember = "Name";
-            brandComboBox.ValueMember = "Id";
-            brandComboBox.SelectedValue = CurrentItem.BrandId;
-
-            categoryComboBox.DataSource = _categoryService.GetCategorysAsync();
-            categoryComboBox.DisplayMember = "Name";
-            categoryComboBox.ValueMember = "Id";
-            categoryComboBox.SelectedValue = CurrentItem.CategoryId;
+            _ = LoadBrands();
+            _ = LoadCategories();
 
             // Load DTO into controls
             idValueLabel.Text = CurrentItem.Id.ToString();
-            modelTextBox.Text = CurrentItem.Model.ToString();
+            modelTextBox.Text = CurrentItem.Model;
             yearTextBox.Text = CurrentItem.Year.ToString();
             ccTextBox.Text = CurrentItem.EngineCc.ToString();
             powerTextBox.Text = CurrentItem.PowerHp.ToString();
         }
+
+        private async Task LoadBrands()
+        {
+            brandComboBox.DisplayMember = "Name";
+            brandComboBox.ValueMember = "Id";
+            brandComboBox.DataSource = await _brandService.GetBrandsAsync();
+
+            if (CurrentItem != null)
+                brandComboBox.SelectedValue = CurrentItem.BrandId;
+
+        }
+        private async Task LoadCategories()
+        {
+            categoryComboBox.DisplayMember = "Name";
+            categoryComboBox.ValueMember = "Id";
+            categoryComboBox.DataSource = await _categoryService.GetCategorysAsync();
+
+            if (CurrentItem != null)
+                categoryComboBox.SelectedValue = CurrentItem.CategoryId;
+        }
+
 
         private void SaveButton_Click(object sender, EventArgs e)
         {

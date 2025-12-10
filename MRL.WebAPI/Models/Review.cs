@@ -17,7 +17,7 @@ public partial class Review
 
     public decimal HandlingScore { get; set; }
 
-    public decimal SpeedScore { get; set; }
+    public decimal EngineScore { get; set; }
 
     public decimal ComfortScore { get; set; }
 

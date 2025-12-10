@@ -32,19 +32,17 @@ namespace MRL.Desktop.Services
         }
 
         // PUT: api/Review/5
-        public async Task<ReviewDTO?> UpdateReviewAsync(ReviewDTO Review)
+        public async Task UpdateReviewAsync(ReviewDTO Review)
         {
             var response = await _http.PutAsJsonAsync("api/Review/" + Review.Id, Review);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<ReviewDTO>();
         }
 
         // DELETE: api/Review/5
-        public async Task<bool> DeleteReviewAsync(int id)
+        public async Task DeleteReviewAsync(int id)
         {
             var response = await _http.DeleteAsync("api/Review/" + id);
             response.EnsureSuccessStatusCode();
-            return true;
         }
 
     }
